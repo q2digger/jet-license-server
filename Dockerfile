@@ -1,15 +1,18 @@
-FROM sgrio/java-oracle:server_jre_8
+FROM anapsix/alpine-java:8_server-jre
+
 MAINTAINER Dmitry Gerasimov <q2digger@gmail.com>
 
 ENV BASE_DIR=/usr/local/tomcat/license-server
 
 COPY docker-launcher.sh /usr/bin/docker-launcher.sh
 
+RUN set -x \\
+    && apk update -qq \
+    && apk add ca-certificates curl tini unzip \
+    && update-ca-certificates 2>/dev/null || true \
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* 
+
 RUN mkdir -p $BASE_DIR \
-  && apt-get update --quiet \
-  && update-ca-certificates \
-  && apt-get install --quiet --yes --no-install-recommends curl unzip \
-  && rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/* \
   && /usr/bin/curl -Ls -o installer.zip https://download-cf.jetbrains.com/lcsrv/license-server-installer.zip \
   && unzip -d $BASE_DIR installer.zip \
   && rm -f installer.zip \
@@ -17,4 +20,5 @@ RUN mkdir -p $BASE_DIR \
 
 EXPOSE 8080
 
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/usr/bin/docker-launcher.sh"]
