@@ -46,7 +46,8 @@ fi
 echo "Starting license server..."
 $BASE_DIR/bin/license-server.sh start
 
-sleep infinity
+# sleep infinity
+while true; do sleep 30; done
 
 echo "Stopping license server..."
 $BASE_DIR/bin/license-server.sh stop

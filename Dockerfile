@@ -3,6 +3,7 @@ FROM anapsix/alpine-java:8_server-jre
 MAINTAINER Dmitry Gerasimov <q2digger@gmail.com>
 
 ENV BASE_DIR=/usr/local/tomcat/license-server
+ENV BUILD 17955
 
 COPY docker-launcher.sh /usr/bin/docker-launcher.sh
 
@@ -13,9 +14,9 @@ RUN set -x \\
     && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* 
 
 RUN mkdir -p $BASE_DIR \
-  && /usr/bin/curl -Ls -o installer.zip https://download-cf.jetbrains.com/lcsrv/license-server-installer.zip \
-  && unzip -d $BASE_DIR installer.zip \
-  && rm -f installer.zip \
+  && /usr/bin/curl -Ls -o installer-${BUILD}.zip https://download.jetbrains.com/lcsrv/license-server-installer.zip \
+  && unzip -d $BASE_DIR installer-${BUILD}.zip \
+  && rm -f installer-${BUILD}.zip \
   && chmod +x /usr/bin/docker-launcher.sh
 
 EXPOSE 8080
