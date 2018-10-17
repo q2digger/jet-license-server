@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import urllib2
 from bs4 import BeautifulSoup
 quote_page = 'https://www.jetbrains.com/help/license_server/release_notes.html'
