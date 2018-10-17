@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+CURRENT_VERSION=$(sed -nr 's/ENV BUILD[[:space:]]*(.+)/\1/p' Dockerfile)
+VERSION=`python bin/jet-parser.py`
+
+echo "Current version: $CURRENT_VERSION"
+echo "Available version: $VERSION"
+
+sed --in-place "s/${CURRENT_VERSION}/${VERSION}/g" Dockerfile
+
+if [[ $VERSION > $CURRENT_VERSION ]]; then
+
+  $VERSION = $CURRENT_VERSION
+
+
+
+fi
