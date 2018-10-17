@@ -23,3 +23,4 @@ Getting started with jetbrains-license-server is easy:
 ### Requirements:
 - Docker
 - docker-compose
+
