@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 CURRENT_VERSION=$(sed -nr 's/ENV BUILD[[:space:]]*(.+)/\1/p' Dockerfile)
 VERSION=`python bin/jet-parser.py`
 
