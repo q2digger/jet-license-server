@@ -1,7 +1,7 @@
 version: '2'
 services:
   license_server:
-    image: q2digger/jetserver:latest
+    image: q2digger/jetbrains-license-server:latest
     ports:
       - "8080:8080"
     environment:
@@ -16,3 +16,4 @@ services:
     volumes:
       - ./data:/root/.jb-license-server
       - ./access-config.json:/root/access-config.json
+
