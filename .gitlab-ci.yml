@@ -3,12 +3,15 @@ image: docker:stable
 services:
   - docker:dind
 
+variables:
+  CONTAINER_IMAGE: q2digger/jetbrains-license-server
+
 before_script:
    - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
 
 build:
   stage: build
   script:
-    - docker pull q2digger/idea-license-server:latest || true
-    - docker build --cache-from q2digger/idea-license-server:latest --tag q2digger/idea-license-server:$CI_COMMIT_REF_NAME 
+    - docker pull $CONTAINER_IMAGE:latest || true
+    - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME 
 
