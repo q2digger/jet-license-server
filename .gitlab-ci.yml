@@ -9,6 +9,6 @@ before_script:
 build:
   stage: build
   script:
-    - docker pull q2digger:idea-license-server:latest || true
-    - docker build --cache-from q2digger:idea-license-server:latest --tag q2digger:idea-license-server:$CI_COMMIT_REF_NAME 
+    - docker pull q2digger/idea-license-server:latest || true
+    - docker build --cache-from q2digger/idea-license-server:latest --tag q2digger/idea-license-server:$CI_COMMIT_REF_NAME 
 
