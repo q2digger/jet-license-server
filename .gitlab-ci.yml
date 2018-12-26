@@ -1,6 +1,14 @@
-before_script:
-   - docker info
+image: docker:stable
 
-build_image:
+services:
+  - docker:dind
+
+before_script:
+   - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+
+build:
+  stage: build
   script:
-    - docker build -t test .
+    - docker pull q2digger:idea-license-server:latest || true
+    - docker build --cache-from q2digger:idea-license-server:latest --tag q2digger:idea-license-server:$CI_COMMIT_REF_NAME 
+
