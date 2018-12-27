@@ -46,7 +46,7 @@ fi
 # should be last
 if [ "z$LICENSE_SERVER_CONTEXT" != "z" ]; then
   echo "Enabling server context to config as /$LICENSE_SERVER_CONTEXT..."
-  sed -i 's/context=\//context='"$LICENSE_SERVER_CONTEXT"'\//g' $BASE_DIR/conf/service-config.properties
+  sed -i 's/context=\//context=\/'"$LICENSE_SERVER_CONTEXT"'\//g' $BASE_DIR/conf/service-config.properties
 fi
 
 echo "Starting license server..."

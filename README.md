@@ -11,6 +11,7 @@ Getting started with jetbrains-license-server is easy:
 
 ### Environment Variable Options
 - `LICENSE_SERVER_HOST` The hostname at which this license server will be available. This setting is required when [exposing the license server from behind a reverse proxy](https://www.jetbrains.com/help/license_server/configuring_secure_connection.html) (optional, disabled by default)
+- `LICENSE_SERVER_CONTEXT` Optional , context is the part of the URL after server name, e.g. https://server.org/**context_path**/
 - `LICENSE_SERVER_SMTP_SERVER` SMTP server to use for sending [stats emails](https://www.jetbrains.com/help/license_server/detailed_server_usage_statistics.html) (optional, stats emails disabled by default)
 - `LICENSE_SERVER_SMTP_PORT` Defaults to 25
 - `LICENSE_SERVER_SMTP_USERNAME` Optional, auth is disabled by default
