@@ -2,7 +2,8 @@
 
 
 CURRENT_VERSION=$(sed -nr 's/ENV BUILD[[:space:]]*(.+)/\1/p' Dockerfile)
-VERSION=`python bin/jet-parser.py`
+# VERSION=`python bin/jet-parser.py`
+VERSION="19340"
 
 echo "Current version: $CURRENT_VERSION"
 echo "Available version: $VERSION"
