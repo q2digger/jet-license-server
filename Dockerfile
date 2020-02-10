@@ -1,25 +1,25 @@
-FROManapsix/alpine-java:8_server-jre
+FROM anapsix/alpine-java:8_server-jre
 
-MAINTAINERDmitryGerasimov<q2digger@gmail.com>
+MAINTAINER Dmitry Gerasimov <q2digger@gmail.com>
 
-ENVBASE_DIR=/usr/local/tomcat/license-server
-ENVBUILD
+ENV BASE_DIR=/usr/local/tomcat/license-server
+ENV BUILD 22218
 
-COPYdocker-launcher.sh/usr/bin/docker-launcher.sh
+COPY docker-launcher.sh /usr/bin/docker-launcher.sh
 
-RUNset-x\\
-&&apkupdate-qq\
-&&apkaddca-certificatescurltiniunzip\
-&&update-ca-certificates2>/dev/null||true\
-&&rm-rf/var/lib/{apt,dpkg,cache,log}//tmp/*/var/tmp/*
+RUN set -x \\
+    && apk update -qq \
+    && apk add ca-certificates curl tini unzip \
+    && update-ca-certificates 2>/dev/null || true \
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* 
 
-RUNmkdir-p$BASE_DIR\
-&&/usr/bin/curl-Ls-oinstaller-${BUILD}.ziphttps://download.jetbrains.com/lcsrv/license-server-installer.zip\
-&&unzip-d$BASE_DIRinstaller-${BUILD}.zip\
-&&rm-finstaller-${BUILD}.zip\
-&&chmod+x/usr/bin/docker-launcher.sh
+RUN mkdir -p $BASE_DIR \
+  && /usr/bin/curl -Ls -o installer-${BUILD}.zip https://download.jetbrains.com/lcsrv/license-server-installer.zip \
+  && unzip -d $BASE_DIR installer-${BUILD}.zip \
+  && rm -f installer-${BUILD}.zip \
+  && chmod +x /usr/bin/docker-launcher.sh
 
-EXPOSE8080
+EXPOSE 8080
 
-ENTRYPOINT["/sbin/tini","--"]
-CMD["/usr/bin/docker-launcher.sh"]
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["/usr/bin/docker-launcher.sh"]
