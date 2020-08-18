@@ -3,7 +3,7 @@ FROM anapsix/alpine-java:8_server-jre
 MAINTAINER Dmitry Gerasimov <q2digger@gmail.com>
 
 ENV BASE_DIR=/usr/local/tomcat/license-server
-ENV BUILD 23527Released
+ENV BUILD 24086Released
 
 COPY docker-launcher.sh /usr/bin/docker-launcher.sh
 
